@@ -1,0 +1,13 @@
+packages:
+    - '.'
+
+minimumReleaseAgeExclude:
+    - '@babel/core@8.0.10'
+    - '@babel/generator@8.0.10'
+    - '@babel/helpers@8.0.10'
+    - '@babel/parser@8.0.10'
+    - '@babel/traverse@8.0.10'
+    - '@babel/types@8.0.10'
+
+publicHoistPattern:
+    - '@inertiajs/core'
