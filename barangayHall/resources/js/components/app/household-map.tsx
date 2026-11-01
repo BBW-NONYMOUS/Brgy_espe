@@ -19,10 +19,7 @@ import type {
     MapFlag,
     PurokSummary,
 } from '@/types';
-
-const OSM_TILES = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const OSM_ATTRIBUTION =
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+import { osmTiles } from '@/lib/map-tiles';
 
 /** Canvas needs real colour strings, so read the theme tokens once. */
 function useMarkerColors(): Record<string, string> {
@@ -110,9 +107,7 @@ export function HouseholdMap({
                 className="h-full min-h-80 w-full"
             >
                 <TileLayer
-                    url={OSM_TILES}
-                    attribution={OSM_ATTRIBUTION}
-                    maxZoom={19}
+                    {...osmTiles}
                     eventHandlers={{
                         tileerror: () => setTilesFailed(true),
                         tileload: () => setTilesFailed(false),

@@ -17,12 +17,15 @@ export default function AuthSplitLayout({
     return (
         <div className="grid min-h-dvh lg:grid-cols-2">
             <aside className="relative hidden flex-col justify-between overflow-hidden bg-primary p-10 text-primary-foreground lg:flex">
-                <div
-                    className="pointer-events-none absolute -right-24 -bottom-24 size-96 rounded-full bg-primary-foreground/10"
+                <img
+                    src="/images/barangay-hall.jpg"
+                    alt=""
+                    className="pointer-events-none absolute inset-0 size-full object-cover"
                     aria-hidden
                 />
+                {/* Tint keeps the panel text readable over the photo. */}
                 <div
-                    className="pointer-events-none absolute top-1/3 -left-16 size-64 rounded-full bg-primary-foreground/5"
+                    className="pointer-events-none absolute inset-0 bg-primary/80"
                     aria-hidden
                 />
                 <div className="relative flex items-center gap-3">

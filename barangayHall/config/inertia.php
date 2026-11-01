@@ -16,7 +16,9 @@ return [
     */
 
     'ssr' => [
-        'enabled' => true,
+        // Off: a LAN-only app gains nothing from server rendering, and with no
+        // SSR server running every request first tried (and could hang on) it.
+        'enabled' => (bool) env('INERTIA_SSR_ENABLED', false),
         'url' => 'http://127.0.0.1:13714',
         // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
 

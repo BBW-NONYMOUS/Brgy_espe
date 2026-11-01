@@ -13,6 +13,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
+import { osmTiles } from '@/lib/map-tiles';
 import type { GeotagValue, MapConfig } from '@/types';
 
 /** Pure-CSS pin (no image files: nothing to break in the bundle, works offline). */
@@ -159,11 +160,7 @@ export function GeotagPicker({ config, value, onChange }: Props) {
                     className="h-80 w-full"
                     aria-label="Choose the household location"
                 >
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        maxZoom={19}
-                    />
+                    <TileLayer {...osmTiles} />
                     <ClickToPlace onPick={pick} />
                     <FlyTo position={flyTarget} />
                     {position && value?.accuracy_m && (
