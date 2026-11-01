@@ -84,3 +84,15 @@ test('audit logs are append-only', function () {
         ->and(fn () => $log->delete())->toThrow(LogicException::class)
         ->and(AuditLog::query()->find($log->id)->description)->toBe('test');
 });
+
+test('seeding again (migrate --seed) keeps the existing data and only refreshes lookups', function () {
+    $this->seed(DatabaseSeeder::class);
+    $residents = Resident::query()->count();
+
+    $this->artisan('db:seed', ['--force' => true])
+        ->expectsOutputToContain('Sample data is already loaded')
+        ->assertSuccessful();
+
+    expect(Resident::query()->count())->toBe($residents)
+        ->and(DB::table('visit_types')->count())->toBe(DB::table('visit_types')->distinct()->count('name'));
+});

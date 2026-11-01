@@ -30,6 +30,27 @@ export default defineConfig({
             formVariants: true,
         }),
     ]),
+    // Pages, the map and the calendar are lazy-loaded, so in dev Vite would only
+    // discover their libraries on first visit, re-bundle mid-session and leave
+    // the page with two copies of React ("Invalid hook call" in MapContainer).
+    // Scan every page up front and pre-bundle the lazy libraries.
+    optimizeDeps: {
+        entries: ['resources/js/app.tsx', 'resources/js/pages/**/*.tsx'],
+        include: [
+            'leaflet',
+            'react-leaflet',
+            'recharts',
+            '@fullcalendar/core',
+            '@fullcalendar/daygrid',
+            '@fullcalendar/interaction',
+            '@fullcalendar/list',
+            '@fullcalendar/react',
+            '@fullcalendar/timegrid',
+        ],
+    },
+    resolve: {
+        dedupe: ['react', 'react-dom'],
+    },
     server: {
         watch: {
             ignored: [
